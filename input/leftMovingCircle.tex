@@ -1,0 +1,95 @@
+\subsubsection{Object moving close to origin.}
+Fig.~\ref{fig:leftMoving_circle_fig} shows the behavior of the two algorithms, when a circular obstacle is moving close to the attractor position. For the IFD, the global minimum is shifted slightly away in direction opposite to the direction of the obstacle (southwest), this seems to be a good strategy to get a larger safety margin when the obstacle passes. On the other hand, it is not necessary to move, because the obstacle is not going to hit the attractor.\\
+The global minimum with the DMM is also shifted to ensure no collision with the approaching obstacle. It is shifted in direction southeast, which is a less optimal option. Additionally, it is shifted less than with the IFD.
+
+\begin{figure}[tb]\centering
+% \begin{subfigure}{.48\columnwidth} %
+% \centering
+% \includegraphics[width=\textwidth]{fig/leftMoving_circle___time20.eps}
+% \caption{-}
+% \label{fig:leftMoving_circle___time2}
+% \end{subfigure} %
+
+\begin{subfigure}{.48\columnwidth} %
+\centering
+\includegraphics[width=\textwidth]{fig/leftMoving_circle_DMM_time20.eps}
+\caption{DMM}
+\label{fig:leftMoving_circle_DMM_time2}
+\end{subfigure}%
+\begin{subfigure}{.48\columnwidth} %
+\centering
+\includegraphics[width=\textwidth]{fig/leftMoving_circle_IFD_time20.eps}
+\caption{IFD}
+\label{fig:leftMoving_circle_IFD_time2}
+\end{subfigure}
+\caption{Obstacle avoidance when moving close to the origin in a DS with a single attractor.}
+\label{fig:leftMoving_circle_fig}
+\end{figure}
+
+% \begin{figure}[H]\centering
+% \begin{subfigure}{.32\textwidth} %
+% \centering
+% \includegraphics[width=\textwidth]{fig/leftMoving_circle_ellipsoid_fig2}
+% \caption{}
+% \label{fig:leftMoving_circle_ellipsoid_fig2}
+% \end{subfigure}\,\, %
+% \begin{subfigure}{.32\textwidth} %
+% \centering
+% \includegraphics[width=\textwidth]{fig/leftMoving_circle_ellipsoid_fig3}
+% \caption{}
+% \label{fig:leftMoving_circle_ellipsoid_fig3}
+% \end{subfigure}
+% \begin{subfigure}{.32\textwidth} %
+% \centering
+% \includegraphics[width=\textwidth]{fig/leftMoving_circle_ellipsoid_fig4}
+% \caption{}
+% \label{fig:leftMoving_circle_ellipsoid_fig4}
+% \end{subfigure}
+
+
+% \begin{subfigure}{.32\textwidth} %
+% \centering
+% \includegraphics[width=\textwidth]{fig/leftMoving_circle_fluid_fig2}
+% \caption{}
+% \label{fig:leftMoving_circle_fluid_fig2}
+% \end{subfigure}\,\, %
+% \begin{subfigure}{.32\textwidth} %
+% \centering
+% \includegraphics[width=\textwidth]{fig/leftMoving_circle_fluid_fig3}
+% \caption{}
+% \label{fig:leftMoving_circle_fluid_fig3}
+% \end{subfigure}
+% \begin{subfigure}{.32\textwidth} %
+% \centering
+% \includegraphics[width=\textwidth]{fig/leftMoving_circle_fluid_fig4}
+% \caption{}
+% \label{fig:leftMoving_circle_fluid_fig4}
+% \end{subfigure}
+
+% \begin{subfigure}{.32\textwidth} %
+% \centering
+% \includegraphics[width=\textwidth]{fig/leftMoving_circle_rotation_fig2}
+% \caption{}
+% \label{fig:leftMoving_circle_rotation_fig2}
+% \end{subfigure}\,\, %
+% \begin{subfigure}{.32\textwidth} %
+% \centering
+% \includegraphics[width=\textwidth]{fig/leftMoving_circle_rotation_fig3}
+% \caption{}
+% \label{fig:leftMoving_circle_rotation_fig3}
+% \end{subfigure}
+% \begin{subfigure}{.32\textwidth} %
+% \centering
+% \includegraphics[width=\textwidth]{fig/leftMoving_circle_rotation_fig4}
+% \caption{}
+% \label{fig:leftMoving_circle_rotation_fig4}
+% \end{subfigure}
+% \caption{Object avoidance of one circle which only starts moving after the solution trajectories have almost converged to the attractor with  DMM(a - c), IFD (d - f) and LRS (g - i)}
+% \label{fig:leftMoving_circle_fig}
+% \end{figure}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master:
+%%% "../main"
+%%% End:

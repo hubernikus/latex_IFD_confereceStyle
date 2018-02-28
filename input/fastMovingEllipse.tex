@@ -1,0 +1,137 @@
+\subsubsection{Fast Translational Moving Object}
+When encountering a fast translational moving obstacle, the IFD avoids the obstacle with splitting the linear DS close to the trajectory which points through the center of mass of the obstacle (Fig.~\ref{fig:fastMovingEllipse_IFD_time13}). Furthermore,  trajectories passing in front of the moving obstacle have a larger safety margin, while the  DS in the wake of the velocity is less disturbed. \\
+With the DMM, a large part of the trajectories which start behind the obstacle, as seen from the attractor, converge to a local minimum on the ellipse, instead of converging to the desired attractor (Fig.~\ref{fig:fastMovingEllipse_DMM_time13}).
+
+\begin{figure}[tb]\centering
+% \begin{subfigure}{.48\columnwidth} %
+% \centering
+% \includegraphics[width=\textwidth]{fig/fastMovingEllipse___time13.eps}
+% \caption{-}
+% \label{fig:fastMovingEllipse___time13}
+% \end{subfigure} %
+\begin{subfigure}{.48\columnwidth} %
+\centering
+\includegraphics[width=\textwidth]{fig/fastMovingEllipse_DMM_time13.eps}
+\caption{DMM}
+\label{fig:fastMovingEllipse_DMM_time13}
+\end{subfigure}%
+\begin{subfigure}{.48\columnwidth} %
+\centering
+\includegraphics[width=\textwidth]{fig/fastMovingEllipse_IFD_time13.eps}
+\caption{IFD}
+\label{fig:fastMovingEllipse_IFD_time13}
+\end{subfigure}
+\caption{Obstacle avoidance of a fast translational moving obstacle placed in a DS with a single attractor.}
+\label{fig:fastMovingEllipse_fig}
+\end{figure}
+
+
+
+% \begin{figure}[H]\centering
+% \begin{subfigure}{.24\textwidth} %
+% \centering
+% \includegraphics[width=\textwidth]{fig/fastMovingEllipse_none_fig0}
+% \caption{}
+% \label{fig:fastMovingEllipse_none_fig0}
+% \end{subfigure}\,\, %
+% \begin{subfigure}{.24\textwidth} %
+% \centering
+% \includegraphics[width=\textwidth]{fig/fastMovingEllipse_none_fig1}
+% \caption{}
+% \label{fig:fastMovingEllipse_none_fig1}
+% \end{subfigure}
+% \begin{subfigure}{.24\textwidth} %
+% \centering
+% \includegraphics[width=\textwidth]{fig/fastMovingEllipse_none_fig2}
+% \caption{}
+% \label{fig:fastMovingEllipse_none_fig2}
+% \end{subfigure}
+% \begin{subfigure}{.24\textwidth} %
+% \centering
+% \includegraphics[width=\textwidth]{fig/rotating_circle_none_fig3} % other one converged to fast
+% \caption{}
+% \label{fig:fastMovingEllipse_none_fig2}
+% \end{subfigure}
+
+% \begin{subfigure}{.24\textwidth} %
+% \centering
+% \includegraphics[width=\textwidth]{fig/fastMovingEllipse_ellipsoid_fig0}
+% \caption{}
+% \label{fig:fastMovingEllipse_ellipsoid_fig0}
+% \end{subfigure}\,\, %
+% \begin{subfigure}{.24\textwidth} %
+% \centering
+% \includegraphics[width=\textwidth]{fig/fastMovingEllipse_ellipsoid_fig1}
+% \caption{}
+% \label{fig:fastMovingEllipse_ellipsoid_fig1}
+% \end{subfigure}
+% \begin{subfigure}{.24\textwidth} %
+% \centering
+% \includegraphics[width=\textwidth]{fig/fastMovingEllipse_ellipsoid_fig2}
+% \caption{}
+% \label{fig:fastMovingEllipse_ellipsoid_fig2}
+% \end{subfigure}
+% \begin{subfigure}{.24\textwidth} %
+% \centering
+% \includegraphics[width=\textwidth]{fig/fastMovingEllipse_ellipsoid_fig3}
+% \caption{}
+% \label{fig:fastMovingEllipse_ellipsoid_fig3}
+% \end{subfigure}
+
+% \begin{subfigure}{.24\textwidth} %
+% \centering
+% \includegraphics[width=\textwidth]{fig/fastMovingEllipse_fluid_fig0}
+% \caption{}
+% \label{fig:fastMovingEllipse_fluid_fig0}
+% \end{subfigure}\,\, %
+% \begin{subfigure}{.24\textwidth} %
+% \centering
+% \includegraphics[width=\textwidth]{fig/fastMovingEllipse_fluid_fig1}
+% \caption{}
+% \label{fig:fastMovingEllipse_fluid_fig1}
+% \end{subfigure}
+% \begin{subfigure}{.24\textwidth} %
+% \centering
+% \includegraphics[width=\textwidth]{fig/fastMovingEllipse_fluid_fig2}
+% \caption{}
+% \label{fig:fastMovingEllipse_fluid_fig2}
+% \end{subfigure}
+% \begin{subfigure}{.24\textwidth} %
+% \centering
+% \includegraphics[width=\textwidth]{fig/fastMovingEllipse_fluid_fig3}
+% \caption{}
+% \label{fig:fastMovingEllipse_fluid_fig3}
+% \end{subfigure}
+
+% \begin{subfigure}{.24\textwidth} %
+% \centering
+% \includegraphics[width=\textwidth]{fig/fastMovingEllipse_rotation_fig0}
+% \caption{}
+% \label{fig:fastMovingEllipse_rotation_fig0}
+% \end{subfigure}\,\, %
+% \begin{subfigure}{.24\textwidth} %
+% \centering
+% \includegraphics[width=\textwidth]{fig/fastMovingEllipse_rotation_fig1}
+% \caption{}
+% \label{fig:fastMovingEllipse_rotation_fig1}
+% \end{subfigure}
+% \begin{subfigure}{.24\textwidth} %
+% \centering
+% \includegraphics[width=\textwidth]{fig/fastMovingEllipse_rotation_fig2}
+% \caption{}
+% \label{fig:fastMovingEllipse_rotation_fig2}
+% \end{subfigure}
+% \begin{subfigure}{.24\textwidth} %
+% \centering
+% \includegraphics[width=\textwidth]{fig/fastMovingEllipse_rotation_fig3}
+% \caption{}
+% \label{fig:fastMovingEllipse_rotation_fig3}
+% \end{subfigure}
+% \caption{Object avoidance one fast moving ellipse with a linear attractor DS with DMM (e - h), IFD (i - l) and LRS (m - p) compared to the dynamical system without any objects (a - d)}
+% \label{fig:fastMovingEllipse_fig}
+% \end{figure}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End:

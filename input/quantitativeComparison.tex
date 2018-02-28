@@ -1,0 +1,78 @@
+\subsubsection{Quantitative comparison}
+For the quantitative comparison, a set of initial conditions is chosen and the simulation is run with either IFD or DMM until convergence or the time limit is reached. \\ %
+According to the SRC measure the IFD modifies the DS less (Tab.~\ref{tab:twoMovingRotatingObs} -\ref{tab:fastMovingEllipse}), as it has a lower value of at least 15\%  compared to the DMM. \\
+The IFD tends to have more collisions, with up to 13\% of the trajectories colliding, while the DMM never collides with an obstacle (Tab.~\ref{tab:fastMovingEllipse}). \\
+The convergence time $T_{conv}$ is in the same range for IFD and DMM (Tab.~\ref{tab:fourStaticObjects}).The path length $D_{conv}$ and the relative convergence energy $\hat E_{conv}$ on the other hand are lower for the IFD during the three simulations. The DMM slightly lags having around 10\%-20\% higher convergence distance and up to 100\% higher relative convergence energy. In general, the energy seems to correlate with the value of the SRC. \\
+The computational time for the IFD and the DMM are in the same range and vary only by about 10\%: the IFD has a higher computational time with several obstacles.  \\
+The complexity based on the length of the code is comparable for both algorithms with around 160 ($\pm$20) lines.
+
+\begin{table}[h]
+\centering
+\caption{Simulation metrics of a dynamical system with two moving obstacles with time step $dt = 0.005 s$, maximum iteration $i_{max} = 1200$ (similar to Fig.~\ref{fig:twoMovingRotatingObs_DMM} \& \ref{fig:twoMovingRotatingObs_IFD}).}
+\label{tab:twoMovingRotatingObs}
+\begin{tabular}{|l|r|r|r|} \hline
+ &\multicolumn{1}{c|}{-} &\multicolumn{1}{c|}{DMM} &\multicolumn{1}{c|}{IFD} \\ \hline
+SRC $[m2/s2]$ &0.0000 &197.6862 &166.6479 \\ \hline
+$N_{pen} \, [\%]$ &0.0 &0.0 &0.0 \\ \hline
+$T_{pen} []$ &0 &0 &0 \\ \hline
+$T_{conv} [s]$ &5.3050 &5.9900 &5.9900 \\ \hline
+$D_{conv} [m]$ &22.1793 &25.7054 &24.0317 \\ \hline
+$\hat E_{conv} [J/kg]$ &25.3305 &87.8503 &61.5909\\ \hline
+$T_{comp} [ms]$ &0.0000 &0.0113 &0.0116 \\ \hline
+\end{tabular}
+\end{table}
+
+
+\begin{table}[h]
+\centering
+\caption{Simulation metrics of a dynamical system with four static objects  with time step $dt = 0.01 s$, maximum iteration $i_{max} = 1200$ and convergence tolerance $r_\epsilon = 0.1 m$ (similar to Fig.~\ref{fig:singleAttractor_severalObstacles_time}).}
+\label{tab:fourStaticObjects}
+\begin{tabular}{|l|r|r|r|} \hline
+ &\multicolumn{1}{c|}{-} &\multicolumn{1}{c|}{DMM} &\multicolumn{1}{c|}{IFD} \\ \hline
+SRC $[m2/s2]$ &0.0000 &129.2555 &99.4898 \\ \hline
+$N_{pen} \; [\%]$ &0.0 &0.0 &3.3 \\ \hline
+$T_{pen} [-] $ &0 &0 &2 \\ \hline
+$T_{conv} [s]$ &4.6250 &9.6500 &9.7750 \\ \hline
+$D_{conv} [m]$ &9.6599 &12.1595 &11.6221 \\ \hline
+$\hat E_{conv} [J/kg]$ &37.0222 &127.2202 &55.9537 \\ \hline
+$T_{comp} [ms]$ &0.0000 &0.0096 &0.0102 \\ \hline
+\end{tabular}
+\end{table}
+
+
+
+\begin{table}[h]
+\centering
+\caption{Simulation metrics of a dynamical system with a fast moving ellipse (similar to Fig.~\ref{fig:fastMovingEllipse_fig}) with time step $dt = 0.005 s$, maximum iteration $i_{max} = 1200$ and convergence tolerance $r_\epsilon = 0.1 m$ .}
+\label{tab:fastMovingEllipse}
+\begin{tabular}{|l|r|r|r|} \hline
+ &\multicolumn{1}{c|}{-} &\multicolumn{1}{c|}{DMM} &\multicolumn{1}{c|}{IFD} \\ \hline
+SRC $[m2/s2]$ &0.00 &665.40 &322.58 \\ \hline
+$N_{pen} \, [\%]$ &0.0 &0.0 &13.3\\ \hline
+$T_{pen} [-]$ &0 &0 &54 \\ \hline
+$T_{conv} [s]$ &5.3050 &5.9900 &5.8150 \\ \hline
+$D_{conv} [m]$ &22.2363 &31.9179 &26.5775 \\ \hline
+$\hat E_{conv} [J/kg]$ &19.1033 &175.4631 &109.4048 \\ \hline
+$T_{comp} [ms]$ &0.0000 &0.0079 &0.0072 \\ \hline
+\end{tabular}
+\end{table}
+
+% \begin{table}[h]
+% \centering
+% \caption{Complexity of the algorithm is analyzed as the number of lines of acting code (without comments and backspaces) used to express the obstacle avoidance. }
+% \label{tab:computationalComplexity}
+% \begin{tabular}{|l|r|} \hline
+% & Length of code [\# of lines]\\ \hline
+% DMM & 143 \\ \hline
+% IFD & 183 \\ \hline
+% LRS & 169 \\ \hline
+% \end{tabular}
+% \end{table}
+
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End:

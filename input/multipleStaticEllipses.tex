@@ -1,0 +1,32 @@
+\subsubsection{Multiple Static Ellipses}
+A good performance in a DS with four static obstacles is achieved with the DMM, where most trajectories converge to the global minimum (Fig.~\ref{fig:singleAttractor_severalObstacles_DMM_time0}). Only the elongated ellipse poses a problems for the algorithm as a local minimum is formed on its surface (southwest).\\
+The IFD avoids the obstacles in a very natural way, the bifurcation seems to minimize the path around the obstacle. Moreover, several obstacles or narrow pathways pose no problem (Fig.~\ref{fig:singleAttractor_severalObstacles_IFD_time0}).
+
+%The robots reach the attractor much slower, when obstacles are placed around it. \\ -- Simulation
+\begin{figure}[tb]\centering
+% \begin{subfigure}{.48\columnwidth} %
+% \centering
+% \includegraphics[width=\textwidth]{fig/singleAttractor_severalObstacles___time0.eps}
+% \caption{-}
+% \label{fig:singleAttractor_severalObstacles___time0}
+% \end{subfigure} %
+\begin{subfigure}{.48\columnwidth} %
+\centering
+\includegraphics[width=\textwidth]{fig/singleAttractor_severalObstacles_DMM_time0.eps}
+\caption{DMM}
+\label{fig:singleAttractor_severalObstacles_DMM_time0}
+\end{subfigure}%
+\begin{subfigure}{.48\columnwidth} %
+\centering
+\includegraphics[width=\textwidth]{fig/singleAttractor_severalObstacles_IFD_time0.eps}
+\caption{IFS}
+\label{fig:singleAttractor_severalObstacles_IFD_time0}
+\end{subfigure}
+\caption{Obstacle avoidance of four static obstacle placed in a DS with a single attractor.}
+\label{fig:singleAttractor_severalObstacles_time}
+\end{figure}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End:

@@ -1,0 +1,112 @@
+%\textbf{Impenetrability}
+%Any coordinate transformation $\mathcal{E} \to \mathcal{C}:  \mathbb{R}^d \to \mathbb{R}^d$ which transforms a convex region in $\mathcal{X}_1^d \subset \mathcal{E}$ to a convex region in $\mathcal{X}_2^d \subset \mathcal{C}$, ensures that any vector starting and ending in the convex region $\dot \xi_{\mathcal{E}} \in \mathcal{X}_1$ will be contained in the convex region $\dot \xi_{\mathcal{C}} \in \mathcal{X}_2$, vise versa any vector outside the starting and ending outside will start and end outside this region.
+
+%The linear transformation with the stretching matrix $A$ and rotation matrix $R$, as well as the translation with $\xi_0$ keep the convex regions intact. As the velocity vector starts and stays outside the concave circle and will therefore stay that way for the transformation back to the ellipse space, while impenetrability is  given. \hfill $\blacksquare$ \vspace{1em}
+\noindent
+\textbf{Impenetrability}
+The surface of the ellipse can be described as:
+\begin{equation}
+ \frac {{}_{e}\xi_x ^ 2}{a^2} + \frac{{}_e\xi_y^2}{b^2} = 1
+\end{equation}
+The subscript ${}_e (\cdot)$ declares that a variable is given in the ellipse reference frame (ERF).
+With the Jacobian, a normal ${}_e \vec n_e$ and unit normal ${}_e \vec n_{e,0}$ vector on the ellipse can be found:
+\begin{equation}
+  {}_e \vec{n}_e =
+  \begin{bmatrix}
+    \frac{2 \cdot {}_e \xi_x}{a^2} \\
+    \frac{2 \cdot {}_e \xi_y}{b^2}
+  \end{bmatrix}
+  \qquad
+  {}_e \vec{n}_{e,0} =
+  \frac{1}{\sqrt{b^4 \cdot {}_e\xi_x^2 + a^4 \cdot{}_e \xi_y^2}}
+  \begin{bmatrix}
+    b^2 \cdot {}_e\xi_x \\
+    a^2 \cdot {}_e\xi_y
+  \end{bmatrix}
+\end{equation}
+
+The unit tangent on the ellipse ${}_e\vec t_{e,0}$ is perpendicular to the normal, and can be written as:
+\begin{equation}
+  {}_e \vec{t}_{e,0} =
+  \frac{1}{\sqrt{b^4 \cdot {}_e\xi_x^2 + a^4 \cdot{}_e \xi_y^2}}
+  \begin{bmatrix}
+    a^2 \cdot {}_e\xi_y \\
+    - b^2 \cdot {}_e\xi_x
+  \end{bmatrix}
+\end{equation}
+
+Before the modulation is applied, the whole coordinate system is transformed, such that the ellipse lies on a unit circle, which is referred as circle reference frame (CRF) with the subscript ${}_c(\cdot)$:
+\begin{equation}
+  {}_c \xi = A^{-1} {}_e \xi \quad \rightarrow \quad {}_e \xi_x = a \cdot {}_c\xi_x \, , \;\; {}_e \xi_y = b \cdot {}_c\xi_y \label{eq:ellipseCircleTrafo}
+\end{equation}
+For a unit circle, the two axis have the same value, and are given by $r = a = b = 1$.
+\begin{equation}
+ \xi_x ^ 2 + \xi_y^2 = 1
+\end{equation}
+The normal ${}_c \vec n_ {c}$ and the unit normal ${}_c \vec n _{c,0}$ of this circle in CRF can be evaluated similarly
+\begin{equation}
+  {}_c \vec{n}_c =
+  \begin{bmatrix}
+    {2 \cdot {}_c \xi_x} \\
+    {2 \cdot {}_c \xi_y}
+  \end{bmatrix}
+  \qquad
+  {}_c \vec{n}_{c,0} =
+  \frac{1}{\sqrt{ {}_c\xi_x^2 + {}_c \xi_y^2}}
+  \begin{bmatrix}
+     {}_c\xi_x \\
+     {}_c\xi_y
+  \end{bmatrix}
+\end{equation}
+
+and the tangent
+\begin{equation}
+  {}_c \vec{t}_{c,0} =
+  \frac{1}{\sqrt{ {}_c\xi_x^2 + {}_c \xi_y^2}}
+  \begin{bmatrix}
+     {}_c\xi_y \\
+     - {}_c\xi_x
+  \end{bmatrix}
+\end{equation}
+
+On the obstacle surface, the velocity needs to be solely in tangential direction. While this was shown for the circle, the proof has to be extended to the ellipse. For this, the tangent on the unit circle needs to be equal to the tangent of the ellipse, too. To evaluate this, the tangent on the unit circle in CRF is transformed to the ERF:
+\begin{equation}
+  {}_e \vec{t}_{c} = A \cdot {}_c \vec{t}_{c,0}
+   \qquad
+   {}_e \vec{t}_{c,0} = \frac{1}{\sqrt{a^2 \cdot {}_c\xi_y^2 + b^2 {}_c\xi_x^2}}
+  \begin{bmatrix}
+       a \cdot {}_c\xi_y \\
+     - b \cdot {}_c\xi_x
+   \end{bmatrix}
+\end{equation}
+Furthermore, the coordinate transformation can be applied (Eq.~\ref{eq:ellipseCircleTrafo}) and leads to:
+\begin{equation}
+  {}_e \vec{t}_{c,0} =
+  \frac{1}{\sqrt{b^4 \cdot {}_e\xi_x^2 + a^4 \cdot{}_e \xi_y^2}}
+  \begin{bmatrix}
+    a^2 \cdot {}_e\xi_y \\
+    - b^2 \cdot {}_e\xi_x
+  \end{bmatrix}
+   =
+    {}_e \vec{t}_{e,0}
+\end{equation}
+which is equal to the tangent on the ellipse in ellipse space. Projecting the velocity solely on the tangent in ellipse space is ensured and therefore impenetrability is guaranteed. \hfill $\blacksquare$ \\
+
+It is important to notice, that the normal on the circle transformed to the ERF ${}_e \vec n_{c,0} $ is not normal to the ellipse:
+\begin{equation}
+  {}_e\vec n_{c,0}
+  =
+  \frac{1}{a b\sqrt{ {}_e\xi_x^2 + {}_e \xi_y^2}}
+  \begin{bmatrix}
+     ab \cdot{}_e\xi_x \\
+     ab \cdot {}_e\xi_y
+   \end{bmatrix}
+  \neq
+  {}_e\vec n_{e,0}
+\end{equation}
+As a result of this, the normal and tangent of the CRF are not orthogonal in ERF, but linearly independent. Zero velocity in direction of the normal on the ellipse can still be ensured, because the normal on the ellipse ${}_e \vec n_{e,0}$ is a linear combination of the normal on the circle in ERF (${}_e \vec n_{c,0}$, ${}_e \vec t_{e,0}$). As there is no velocity in direction of ${}_e \vec n_{c,0}$ it is a trivial normal combination resulting in ${}_e \vec n_{e,0} = 0$.
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End:
