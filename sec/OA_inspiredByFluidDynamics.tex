@@ -155,6 +155,80 @@ Furthermore, it the sufficient condition for impenetrability for the eigenvalues
 \textbf{No Change of the Tangential Velocity:}
 Under the intention to modify the DS as little as possible while ensuring impenetrability, the eigenvalue corresponding to the tangent in (\ref{eq:eigValues}) is set to one ($\lambda_1 = 1$). The initial value is an result of the incompressibility condition of the fluid,  which needs to accelerate the DS in tangential direction to get the same flow volume through a smaller area. This is not necessary for our application of the obstacle avoidance in robotics.\footnote{Keeping the incompressibility condition might be of interest, when controlling a swarm of robots around an obstacle to avoid them from colliding.}
 
+\begin{figure*}[tb]\centering
+\begin{subfigure}{.215\textwidth} %
+\centering
+\includegraphics[width=\textwidth]{fig/avoidingEllipse_DMM.eps}
+\caption{DMM in ERF}
+\label{fig:avoidingEllipse_DMM}
+\end{subfigure} %
+\begin{subfigure}{.215\textwidth} %
+\centering
+\includegraphics[width=\textwidth]{fig/avoidingEllipse_IFD_ERF.eps}
+\caption{IFD in ERF}
+\label{fig:avoidingEllipse_IFD_ERF}
+\end{subfigure}
+\begin{subfigure}{.285\textwidth} %
+\centering
+\includegraphics[width=\textwidth]{fig/avoidingEllipse_IFD_CRF.eps}
+\caption{IFD in CRF}
+\label{fig:avoidingEllipse_IFD_CRF}
+\end{subfigure}
+\begin{subfigure}{.24\textwidth} %
+\centering
+\includegraphics[width=\textwidth]{fig//staticEllipse_IFD_time0.eps}
+\caption{Streamlines of DS with IFD around ellipse.}
+\label{fig:avoidingEllipse_IFD}
+\end{subfigure}
+\caption{Fig. (a) \& (b) show the comparison between the two alogirthms, where the tangent (green) stays the same, but the normal (red) changes. Furthermore, initial linear DS (blue arrows) is modulated differently to the final dynamics (blue arrows), as a result of the basis vectors. The pseudo normal (green) and tangent (red) in (a) is evaluated by stretching the space and the corresponding actual normal and tangent on the uniit circle in (c). It can be seen in (d) that this new modulation rotates the DS away from the centerline and around the ellipse.}
+\label{fig:comparison_behaviour}
+\end{figure*}
+
+
+
+\section{Comparison}
+A good performance in a DS with four static obstacles is achieved with the DMM, where most trajectories converge to the global minimum (Fig.~\ref{fig:singleAttractor_severalObstacles_DMM_time0}). Only the elongated ellipse poses a problems for the algorithm as a local minimum is formed on its surface (southwest).\\
+The IFD avoids the obstacles in a very natural way, the bifurcation seems to minimize the path around the obstacle. Moreover, several obstacles or narrow pathways pose no problem (Fig.~\ref{fig:singleAttractor_severalObstacles_IFD_time0}).
+\begin{figure}[tb]\centering
+\begin{subfigure}{.48\columnwidth} %
+\centering
+\includegraphics[width=\textwidth]{fig/singleAttractor_severalObstacles_DMM_time0.eps}
+\caption{DMM}
+\label{fig:singleAttractor_severalObstacles_DMM_time0}
+\end{subfigure}%
+\begin{subfigure}{.48\columnwidth} %
+\centering
+\includegraphics[width=\textwidth]{fig/singleAttractor_severalObstacles_IFD_time0.eps}
+\caption{IFS}
+\label{fig:singleAttractor_severalObstacles_IFD_time0}
+\end{subfigure}
+\caption{Obstacle avoidance of four static obstacle placed in a DS with a single attractor.}
+\label{fig:singleAttractor_severalObstacles_time}
+\end{figure}
+
+The avoidance of an arbitrarily positioned circular obstacle is successfully mastered by the IRF algorithm (Fig.~\ref{fig:oneStaticCirc_IFD}). The obstacle trajectory avoid the obstacle on both sides and it resembles natural flow.
+%\subsubsection{Static Limit Cycle}
+The IRF can avoid several obstacles when being placed in a nonlinear DS with a limit cycle  (Fig.~\ref{fig:limitCicle_twoObst_IFD_time0}). The ellipse form of the initial limit cycle can still be identified far away from the obstacles and the trajectories move close to the obstacle boundaries when it is close to them.
+
+\begin{figure}[tb]\centering
+\begin{subfigure}{.48\columnwidth} %
+\centering
+\includegraphics[width=\textwidth]{fig/oneStaticCirc_DMM_time0.eps}
+\caption{Avoiding a circle in an original DS with a single attractor.}
+\label{fig:oneStaticCirc_DNN}
+\end{subfigure}\,\, %
+\begin{subfigure}{.48\columnwidth} %
+\centering
+\includegraphics[width=\textwidth]{fig/oneStaticCirc_IFD_time0.eps}
+\caption{Avoiding a circle in an original DS with a single attractor.}
+\label{fig:oneStaticCirc_IFD}
+\end{subfigure}\,\, %
+\caption{Using IFD to avoid static obstacles in different DS.}
+\label{fig:static_IFD}
+\end{figure}
+
+
+
 % \vspace{1ex} \noindent
 % \textbf{Emergency Exiting:}
 % While in continuous time and space the robot will never enter the surface, this is not ensured in with discrete integration. If during a simulation, the robot enters the safety margin of an obstacle, the algorithm switches to the emergency mode. In this mode the robot moves away from the center as follows:
@@ -348,35 +422,6 @@ Under the intention to modify the DS as little as possible while ensuring impene
 % \end{subfigure}
 %\end{figure*}[tb]\centering
 
-\begin{figure*}[tb]\centering
-\begin{subfigure}{.215\textwidth} %
-\centering
-\includegraphics[width=\textwidth]{fig/avoidingEllipse_DMM.eps}
-\caption{DMM in ERF}
-\label{fig:avoidingEllipse_DMM}
-\end{subfigure} %
-\begin{subfigure}{.215\textwidth} %
-\centering
-\includegraphics[width=\textwidth]{fig/avoidingEllipse_IFD_ERF.eps}
-\caption{IFD in ERF}
-\label{fig:avoidingEllipse_IFD_ERF}
-\end{subfigure}
-\begin{subfigure}{.285\textwidth} %
-\centering
-\includegraphics[width=\textwidth]{fig/avoidingEllipse_IFD_CRF.eps}
-\caption{IFD in CRF}
-\label{fig:avoidingEllipse_IFD_CRF}
-\end{subfigure}
-\begin{subfigure}{.24\textwidth} %
-\centering
-\includegraphics[width=\textwidth]{fig//staticEllipse_IFD_time0.eps}
-\caption{Streamlines of DS with IFD around ellipse.}
-\label{fig:avoidingEllipse_IFD}
-\end{subfigure}
-\caption{Fig. (a) \& (b) show the comparison between the two alogirthms, where the tangent (green) stays the same, but the normal (red) changes. Furthermore, initial linear DS (blue arrows) is modulated differently to the final dynamics (blue arrows), as a result of the basis vectors. The pseudo normal (green) and tangent (red) in (a) is evaluated by stretching the space and the corresponding actual normal and tangent on the uniit circle in (c). It can be seen in (d) that this new modulation rotates the DS away from the centerline and around the ellipse.
-\label{fig:comparison_behaviour}
-\end{figure*}
-
 % \subsubsection{Pseudo Code}
 % A detailed description of the implementation is given in Algorithm~\ref{code:IRF} with a corresponding visualization in Fig.~\ref{fig:avoidingEllipse_IFD_CRF}.
 % \begin{algorithm}[t]
@@ -408,27 +453,35 @@ Under the intention to modify the DS as little as possible while ensuring impene
 %   \end{algorithmic}
 % \end{algorithm}
 
-% \subsection{Results}
+% % \subsection{Results}
 % The avoidance of an arbitrarily positioned circular obstacle is successfully mastered by the IRF algorithm (Fig.~\ref{fig:oneStaticCirc_IFD}). The obstacle trajectory avoid the obstacle on both sides and it resembles natural flow.
 % %\subsubsection{Static Limit Cycle}
 % The IRF can avoid several obstacles when being placed in a nonlinear DS with a limit cycle  (Fig.~\ref{fig:limitCicle_twoObst_IFD_time0}). The ellipse form of the initial limit cycle can still be identified far away from the obstacles and the trajectories move close to the obstacle boundaries when it is close to them.
+
 % \begin{figure}[tb]\centering
+% \begin{subfigure}{.48\columnwidth} %
+% \centering
+% \includegraphics[width=\textwidth]{fig/oneStaticCirc_DMM_time0.eps}
+% \caption{Avoiding a circle in an original DS with a single attractor.}
+% \label{fig:oneStaticCirc_DNN}
+% \end{subfigure}\,\, %
 % \begin{subfigure}{.48\columnwidth} %
 % \centering
 % \includegraphics[width=\textwidth]{fig/oneStaticCirc_IFD_time0.eps}
 % \caption{Avoiding a circle in an original DS with a single attractor.}
 % \label{fig:oneStaticCirc_IFD}
 % \end{subfigure}\,\, %
-% \begin{subfigure}{.48\columnwidth} %
-% \centering
-% \includegraphics[width=\textwidth]{fig/limitCicle_twoObst_IFD_time0.eps}
-% \caption{Avoiding two ellipses in an original DS with a limit cycle.}
-% \label{fig:limitCicle_twoObst_IFD_time0}
-% \end{subfigure}
+% % \begin{subfigure}{.48\columnwidth} %
+% % \centering
+% % \includegraphics[width=\textwidth]{fig/limitCicle_twoObst_IFD_time0.eps}
+% % \caption{Avoiding two ellipses in an original DS with a limit cycle.}
+% % \label{fig:limitCicle_twoObst_IFD_time0}
+% % \end{subfigure}
 % \caption{Using IFD to avoid static obstacles in different DS.}
 % \label{fig:static_IFD}
 % \end{figure}
-% %\subsubsection{Two Moving Obstacles}
+
+% \subsubsection{Two Moving Obstacles}
 % All trajectories safely avoid the moving and rotating obstacles with IFD (Fig.~\ref{fig:twoMovingRotatingObs_IFD}). Additionally, the vector field seems to split evenly to go in front of or behind the obstacles, but in front of the obstacle most trajectories avoid the obstacle with at a larger distance. Furthermore, it seems that the trajectories are only influenced by the rotation of the obstacle, when they are within the radius of the largest axis. Additionally, there is no wake behind the obstacles. The minimum of the DS doesn't align with the real attractor (star).
 % \begin{figure}[tb]\centering
 % \begin{subfigure}{.48\columnwidth} %
@@ -452,6 +505,8 @@ Under the intention to modify the DS as little as possible while ensuring impene
 % \subsection{Limitations}
 % Moving and rotating can disturb an object, even if it is placed at the point of attraction.\\
 % This is the result of the algorithm, with which the DS is modulated in the object frame. The transformed DS is not zero anymore, and the inertial modulated system won't be either. This in stabilized the point of attracted. It to consider, whether this is wanted or whether the object should stay rock still at the point of attraction.
+
+
 
 %%% Local Variables:
 %%% mode: latex
