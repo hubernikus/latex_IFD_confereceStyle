@@ -1,79 +1,51 @@
 \section{Obstacle Avoidance Inspired by Fluid Dynamics (IFD)} \label{sec:IFD}
-An important technique in fluid dynamics for describing flow around obstacles in two dimensions, it eh use of conformal mapping \cite{milne1996theoretical,feder1997real}. One of the most common mapping is the Joukowski transformation, which allows to describe the transformation from a unit circle at the origin to any arbitrary positioned ellipse. We want to do a similar procedure by taking the algorithm described in Sec.~\ref{sec:DMM}. The DMM works well with circular obstacles, but shows limitation with ellipses. This is expected to be overcome by applying the obstacle avoidance algorithm on a unit circle and then transform the whole space, such that the unit circle comes to lie on the ellipse surface.
-% \begin{equation}
-%   \xi_{Cylindric} =
-% \begin{bmatrix}
-% \xi_r \\
-% \xi_{\theta}
-% \end{bmatrix}
-% =
-% R(\theta)
-% \begin{bmatrix}
-% \xi_x\\
-% \xi_y
-% \end{bmatrix}
-% = R(\theta) \cdot \xi_{Cartesian}
-% \end{equation}
-% with the rotation matrix $R$ given as a function of the position $\theta = \text{arctan} \left(\frac{\xi_y}{\xi_x} \right)$:
-
-% \begin{equation}
-% R(\theta) =
-% \begin{bmatrix}
-% \cos(\theta) & -\sin(\theta) \\
-% \sin(\theta) & \cos(\theta)
-% \end{bmatrix}
-% \end{equation}
-
-% The transformation is applied for velocities (DS) and acceleration:
-% \begin{equation}
-%   \dot \xi_{Cylindric}
-% =
-% R(\theta) \cdot
-% \dot \xi_{Cartesian}
-% \qquad
-% \ddot \xi_{Cylindric}
-% =
-% R(\theta) \cdot
-% \ddot \xi_{Cartesian}
-% \end{equation}
+An important technique in fluid dynamics for describing flow around obstacles in two dimensions, is the use of conformal mapping \cite{milne1996theoretical,feder1997real}. One of the most common mapping is the Joukowski transformation, which allows to describe the transformation from a unit circle at the origin to any arbitrary positioned ellipse. We want to do a similar procedure by taking the algorithm described in Sec.~\ref{sec:DMM}, apply it to a unit circle and then transform the coordinate system such that the unit circle becomes an ellipse.
 
 The algorithm in this section is described for ellipses in two dimensions, where the boundary is given as:
 \begin{equation}
 \mathcal{X}^b \subset \mathbb{R}^2 = \{ \xi \in \mathbb{R}^2 : \frac{\tilde \xi_1^2}{a_1^2} + \frac{\tilde \xi_2^2}{a_2^2} = 1 \} \label{eq:ellipse_2d}
 \end{equation}
 with the position $\tilde xi$ relative to the center $\xi^o$ described in the coordinate system aligned with the main axis of the ellipse $a_1$, $a_2$.\\
-Furthermore, it is expected to be extendable to general convex obstacles in $d$ dimensions. % r the description of the velocity, Cartesian and cylindric coordinates are used, the conversion is given as follows:
+Furthermore, it is expected that the algorithm is  extendable to general convex obstacles in $d$ dimensions. % r the description of the velocity, Cartesian and cylindric coordinates are used, the conversion is given as follows:
 
-\subsection{Algorithm Description}
-The modulation of the DS with a convex obstacle has been described in \ref{eq:modMatrix}. It was furthermore observed that this algorithm did perform well with a circle. We will therefore base the new algorithm on this local modulation of a unit circle. The level function used to caclulate the eigenvalues in (\ref{eq:eigValues}) is given for the unit circle as:
+\subsection{Algorithm}
+The modulation of the DS with a convex obstacle has been described in \ref{eq:modMatrix}. It was furthermore observed, that this algorithm did perform well with a circle but has limitations with more complex obstacles. We will therefore base the new algorithm on this local modulation of a unit circle. The level function $\Gamma(\tilde \xi)$ used to caclulate the eigenvalues in (\ref{eq:eigValues}) is given for the unit circle as:
 \begin{equation}
 \Gamma(\tilde \xi) = \| \tilde \xi \|^2 \label{eq:levelCircle}
 \end{equation}
-The description of the modulated DS around a unit circle is then scaled with the length of the main axis of the desired ellipse. The level function for an ellipse is given as:
+The coordinate system, is then scaled with the value of the main axis of the ellipse $a_1$ and $a_2$. The level function for this new ellipse obstacle is now given as:
 \begin{equation}
 \Gamma(\tilde \xi) = \frac{\tilde \xi_1^2}{a_1^2} +  \frac{\tilde \xi_2^2}{a_2^2} \label{eq:levelEllipse}
-\end{equation}At this point, we introduce the unit circle reference frame (CRF) which is indicated by indice ${}_c (\cdot)$ and the ellipse reference frame (ERF) with the indice ${}_e(\cdot)$. \\
-It can be observed, that the tangent on the circle ${}_c \vec e_1(\tilde \xi)$ is a tangent of the ellipse after the transformation ${}_e \vec e_1(\tilde \xi)$. On the other hand, the normal on the circle ${}_c \vec n (\tilde \xi)$ is not a normal on the ellipse after the transformation, but it is pointing in opposite direction of the origin transformation ${}_e \hat{\vec n} (\tilde \xi) = \frac{1}{\sqrt{\tilde \xi_1^2 + \tilde \xi_2^2}} [\tilde \xi_1 \;\; \tilde \xi_2]^T $.
+\end{equation}
 
-%\subsubsection{Transformation to Ellipse}
-\\ \noindent \textbf{Theorem 1}
-\textit{Consider a linear stretching of space such that a unit spherical obstacle in $\mathbb{R}^d$ with center ${}_c \xi^o$ and radius ${}_cr^o = 1$, with surface $\mathcal{X}^b \subset \mathbb{R}^2  = \{ \xi \in \mathbb{R}^2: \| \xi - {}_c\xi^o \| = 1\}$, is transformed into an ellipse defined in (\ref{eq:ellipse_2d}). Any tangent  on the unit circle ${}_c \vec{e}_i$ which is transformed in such a way, will be a tangent on the ellipse (${}_e \vec{e}_i$). This is not the case for normal vectors on the circle surface ${}_c \vec{n}$ which will are not normal to the ellipse.}\\
+\noindent \textbf{Theorem 1}
+\textit{Consider a linear stretching of space such that a unit spherical obstacle in $\mathbb{R}^d$ with center ${}_c \xi^o$ and radius ${}_cr^o = 1$, with surface $\mathcal{X}^b \subset \mathbb{R}^2  = \{ \xi \in \mathbb{R}^2: \| \xi - {}_c\xi^o \| = 1\}$, is transformed into an ellipse defined in (\ref{eq:ellipse_2d}). Any tangent  on the unit circle ${}_c \vec{e}_i$ which is transformed in such a way, will be a tangent on the ellipse (${}_e \vec{e}_i$). This is not the case for normal vectors on the circle surface ${}_c \vec{n}$,  which are not normal to the ellipse after transformation.}\\
 \textbf{Proof:} See Appendix~\ref{sec:proof1} \\
 ${}$ \hfill $\blacksquare$\\
 
 %Any transformation $\mathcal{X}^o \rightarrow \mathcal{X}^s : \mathcal{X}^d \leadsto \mathcal{X}^d$ which keeps a closed hyper-surface intact and ensures a smooth first order Jacobian will transform a tangent of the later hyper-surface to a tangent in the new space.
-Fig.~\ref{fig:} illustrates the tangent (green) and the normal (red) before and after transformation for both the DMM and IFD. As it can be observed the tangent always stays tangent, while the normal is not normal on the ellipse.
+Fig.~\ref{fig:comparison_behaviour} illustrates the tangent (green) and the normal (red) before and after transformation for both the IFD, additionally it shows it for the DMM around the same ellipse. \\
+At this point, we introduce the unit circle reference frame (CRF) which is indicated by indice ${}_c (\cdot)$ and the ellipse reference frame (ERF) with the indice ${}_e(\cdot)$. \\
+It can be observed, that the tangent on the circle ${}_c \vec e_1(\tilde \xi)$ is a tangent of the ellipse after the transformation ${}_e \vec e_1(\tilde \xi)$. On the other hand, the normal on the circle ${}_c \vec n (\tilde \xi)$ is not a normal on the ellipse after the transformation.This transformed normal on the unit circle will further be referred to as \textit{pseudo normal} $\hat{\vec n} (\tilde \xi)$  in the ellipse space and is given as:
+\begin{equation}
+\hat{\vec n }(\tilde \xi) = {}_e\vec n_{c} (\tilde \xi) =   \frac{1}{\sqrt{ {}_e\tilde \xi_1^2 + {}_e \tilde \xi_2^2}}
+  \begin{bmatrix}
+     {}_e\tilde \xi_1 \\
+     {}_e\tilde \xi_2
+   \end{bmatrix}
+\end{equation}
 
-This allows to rewrite (\ref{eq:modMatrix}) to get a modulation matrix for IFD $\hat M$:
+The modulation matrix in (\ref{eq:modMatrix}) needs to be adapted to for the IFD. And we get a new modulation matrix $\hat M$:
 \begin{equation}
 \hat M = \hat E(\tilde \xi)  D(\tilde \xi) \hat E^{-1}(\tilde \xi)\label{eq:modMatrix_IFD}
-\end{equation}
-where the matrix of basis vector for the IFD $\hat E$ is not necessarily orthogonal anymore, but they the basis vectors linearly independent:
+\end{equation}IFw
+The normal in $E(\xi)$ is replaced with the pseudo normal in $\hat E(\tilde)$:
 \begin{equation}
   \hat E(\tilde \xi) = \begin{bmatrix} \hat{\vec n}(\tilde \xi) & \vec e_1(\tilde \xi) \end{bmatrix}
 \end{equation}
+The basis vectors for the IFD which construct $\hat E$ are not necessarily orthogonal, but only linearly independent.
 
-The modulation follows analogous to (\ref{eq:modulatedDS}) as:
+The modulation of the DS follows analogous to (\ref{eq:modulatedDS}) as:
 \begin{equation}
   \dot \xi = \hat{M}(\xi) f(\xi) \label{eq:modulatedDS_IFD}
 \end{equation}
@@ -84,77 +56,25 @@ The modulation follows analogous to (\ref{eq:modulatedDS}) as:
 ${}$ \hfill $\blacksquare$
 
 
-While impenetrability of the obstacle could already be ensured by the DMM, a limitation of the later was the observation of local minima on the surface of ellipse shaped obstacles. The IFD was designed to overcome this limitation, where it does no create local minima on the ellipse surface. On the other hand, a smooth vector field in a sphere world must have at least as many extrema points as obstacles \cite{koditschek1990robot}. In the optimal case this extrema can be turned into a saddle point where points on one line converges to, we refer to this line as center line which is given as:
+While impenetrability of the obstacle could already be ensured by the DMM, a limitation of the later was the observation of local minima on the surface of ellipse shaped obstacles. The IFD was designed to overcome this limitation, where it does no create local minima on the ellipse surface. The goal is to remove the local extrema, but it could be shown, that a smooth vector field in a sphere world must have at least as many extrema as obstacles \cite{koditschek1990robot}. In the optimal case this extrema can be turned into a saddle point, where points on one line converges to it. With our current modulation matrix $\hat M(\tilde \xi)$ and in a linear DS $f_l$, all the points on this saddle point trajectory have an initial DS which points directly in direction of the pseudo normal $\hat{\vec n}$. As a result of this, the modulation with $\hat M(\xi)$ only causes a change in magnitude of the velocity, but does not turn the velocity to the right or left. The saddle point trajectory is given by:
+% \begin{equation}
+%   \begin{split}
+%   \mathcal{X}^s \subset \mathbb{R}^2 = \{\xi \in \mathbb{R}^2: &\frac{1}{\|f_l(\xi)\|} f_l(\xi) = - \hat{\vec n}(\tilde \xi),\\
+%   & \|\xi - \xi^a\| > \| \xi - \xi^o\| \} \label{eq:centerLine}
+%   \end{split}
+% \end{equation}.\\
+
 \begin{equation}
   \begin{split}
-  \mathcal{X}^c \subset \mathbb{R}^2 = \{\xi \in \mathbb{R}^2: &\frac{1}{\|f_l(\xi)\|} f_l(\xi) = - \hat{\vec n}(\tilde \xi),\\
-  & \|\xi - \xi^a\| > \| \xi - \xi^o\| \} \label{eq:centerLine}
+  \mathcal{X}^s \subset \mathbb{R}^2 = \{\xi \in \mathbb{R}^2: \; f_l(\xi) \parallel \hat{\vec n}(\tilde \xi), \} \label{eq:centerLine}
   \end{split}
 \end{equation}.\\
 
 \noindent \textbf{Theorem 3}
-\textit{Consider a time invariant, linear DS $f_l(\xi)$ with a single attractor placed at $\xi^a$ given by (\ref{eq:DS_lin}). The DS is modulated according to (\ref{eq:modulatedDS_IFD}). Any motion $\{\xi\}_t$ that starts outside the obstacle and is not on the center line as given in (\ref{eq:centerLine}) i.e. $\{ \{\xi\}_0 \in \mathbb{R}^d \setminus \mathcal{X}^c \; : \; \Gamma(\{\xi\}_0) \geq 0\}$ will move around the obstacle and converge to the attractor $\xi^a$.} \\
+\textit{Consider a time invariant, linear DS $f_l(\xi)$ with a single attractor placed at $\xi^a$ given by (\ref{eq:DS_lin}). The DS is modulated according to (\ref{eq:modulatedDS_IFD}). Any motion $\{\xi\}_t$ that starts outside the obstacle and is not on the saddle point trajectory as given in (\ref{eq:centerLine}) i.e. $\{ \{\xi\}_0 \in \mathbb{R}^d \setminus \mathcal{X}^s \; : \; \Gamma(\{\xi\}_0) \geq 0\}$ will move around the obstacle and converge to the attractor $\xi^a$.} \\
 \textbf{Proof:} See Appendix~\ref{sec:proof3} \\
 ${}$ \hfill $\blacksquare$ \\
-Furthermore, it the sufficient condition for impenetrability for the eigenvalues is:  $\lambda_n(\tilde \xi) < \lambda_1 (\tilde \xi)$. This allows more flexibility in their choice than what is proposed by \cite{khansari2012dynamical,}.
-
-%\subsubsection{Theorem 2}
-
-
-% \subsubsection{Deflection at Circle at the origin} \label{sec:basicCircle}
-% Observations from fluid dynamics shows, that the flow of an incompressible fluid vanishes in the radial direction around a cylinder but speeds up in the tangential. The modulation of the velocity of an incompressible fluid in cylindrical coordinates around a circular object ($\forall \;  \xi_r \geq R$) is given as follows \cite{batchelor2000introduction}:
-% \begin{equation}
-% \begin{bmatrix}
-% \dot{\bar{\xi}}_r \\
-% \dot{\bar{\xi}}_{\theta}
-% \end{bmatrix}
-% =
-% \begin{bmatrix}
-% \left(1 - \frac{R_{circ}^2}{\xi_r^2}\right)  & 0\\
-% 0 & \left(1 + \frac{R_{circ}^2}{\xi_r^2}\right)
-% \end{bmatrix}
-% \begin{bmatrix}
-% \dot{\xi}_r \\
-% \dot{\xi}_{\theta}
-% \end{bmatrix}
-% = M_{fluid} \cdot \dot{\xi}_{cyl} \label{eq:fluidModulation}
-% \end{equation}
-% with the circle radius  $R_{circ}$.
-
-% At distances far away from the origin ($\xi_r >> R_{circ}$) the modulation matrix results in the identity matrix, and the modulation matrix does therefore not change the DS.
-
-% \vspace{1ex} \noindent
-% \textbf{Impenetrability}
-% The impenetrability, shown as the von Neumann boundary condition, is given if:
-% \begin{equation}
-%   \vec n \cdot \dot \xi = 0 \qquad \forall \; \xi \in \mathcal{X}^b
-% \end{equation}
-% This is ensured, if for all the points on the obstacle's boundaries, the normal velocity described in the obstacle reference frame (ORF) vanishes. For an obstacle with its center at the origin and radius $R_{circ}$, the modulation matrix (Eq.~\ref{eq:fluidModulation}) can be evaluated on the boundary  as:
-% \begin{equation}
-%   M_{fluid}(\xi^b)
-%   \overset{{\xi}_r = R_{circ}}{=}
-%  \text{diag}(0,2)
-% \end{equation}
-% The modulated velocity is accordingly:
-% \begin{equation}
-% \begin{bmatrix}
-% \dot{\bar{\xi}}_r \\
-% \dot{\bar{\xi}}_{\theta}
-% \end{bmatrix}
-% =
-% \begin{bmatrix}
-% 0 \\
-% 2 \cdot \dot{\xi}_{\theta}
-% \end{bmatrix}
-% \end{equation}
-% The velocity in direction of the obstacle $\dot{\bar\xi}_r$ vanishes, while the tangential is doubled. The impenetrability of a circular obstacle is therefore given.\hfill $\blacksquare$\\
-
-% Moreover, it can easily be seen that the second diagonal component of the modulation matrix $M_{fluid}[2,2]$ can easily be modified without affecting the impenetrability condition. On top of that, the cubic exponent of $M[1,1]$ can easily be replaced with any exponent $p \in \mathbb{R}^+$ while ensuring impenetrability.\footnote{This is also referred to as reactivity in similar approaches \cite{khansari2012dynamical,}.} Furthermore, a different continuous modulation function $f_{mod}(\xi_r)$ can be used under the condition: $f_{mod}(\|\xi_r \| = R) = 0$. \\
-
-\vspace{1ex} \noindent
-\textbf{No Change of the Tangential Velocity:}
-Under the intention to modify the DS as little as possible while ensuring impenetrability, the eigenvalue corresponding to the tangent in (\ref{eq:eigValues}) is set to one ($\lambda_1 = 1$). The initial value is an result of the incompressibility condition of the fluid,  which needs to accelerate the DS in tangential direction to get the same flow volume through a smaller area. This is not necessary for our application of the obstacle avoidance in robotics.\footnote{Keeping the incompressibility condition might be of interest, when controlling a swarm of robots around an obstacle to avoid them from colliding.}
-
+Fig.~\ref{fig:comparison_behaviour} shows very well, at every point in space the DS is modulated in the right direction, such that it doe not converge to a local minimum as could be observed with the DMM.
 \begin{figure*}[tb]\centering
 \begin{subfigure}{.215\textwidth} %
 \centering
@@ -186,9 +106,13 @@ Under the intention to modify the DS as little as possible while ensuring impene
 
 
 
+\vspace{1ex} \noindent
+\textbf{No Change of the Tangential Velocity:}
+Moreover, the sufficient condition for convergence for the eigenvalues is:  $\lambda_n(\tilde \xi) < \lambda_1 (\tilde \xi)$. This allows more flexibility in their choice than what is proposed by \cite{khansari2012dynamical,}. Under the intention to modify the DS as little as possible while pensuring impenetrability, the eigenvalue corresponding to the tangent in (\ref{eq:eigValues}) is set to one ($\lambda_1 = 1$). The initial value is an result of the incompressibility condition of the fluid,  which needs to accelerate the DS in tangential direction to get the same flow volume through a smaller area. This is not necessary for our application of the obstacle avoidance in robotics.\footnote{Keeping the incompressibility condition might be of interest, when controlling a swarm of robots around an obstacle to avoid them from colliding.}
+
+
 \section{Comparison}
-A good performance in a DS with four static obstacles is achieved with the DMM, where most trajectories converge to the global minimum (Fig.~\ref{fig:singleAttractor_severalObstacles_DMM_time0}). Only the elongated ellipse poses a problems for the algorithm as a local minimum is formed on its surface (southwest).\\
-The IFD avoids the obstacles in a very natural way, the bifurcation seems to minimize the path around the obstacle. Moreover, several obstacles or narrow pathways pose no problem (Fig.~\ref{fig:singleAttractor_severalObstacles_IFD_time0}).
+A good performance in a DS with four static obstacles is achieved with the IFD, where most trajectories converge to the global minimum (Fig.~\ref{fig:singleAttractor_severalObstacles_time}). On the other hand, the elongated ellipses poses a problems for the DMM as a local minimum is formed on the surface of the largest one (southwest), but also for the smaller one the algorithm does not seem to perform well. Moreover, several ellipses and narrow pathways are handles very well by both algorithms.
 \begin{figure}[tb]\centering
 \begin{subfigure}{.48\columnwidth} %
 \centering
@@ -199,32 +123,29 @@ The IFD avoids the obstacles in a very natural way, the bifurcation seems to min
 \begin{subfigure}{.48\columnwidth} %
 \centering
 \includegraphics[width=\textwidth]{fig/singleAttractor_severalObstacles_IFD_time0.eps}
-\caption{IFS}
+\caption{IFD}
 \label{fig:singleAttractor_severalObstacles_IFD_time0}
 \end{subfigure}
 \caption{Obstacle avoidance of four static obstacle placed in a DS with a single attractor.}
 \label{fig:singleAttractor_severalObstacles_time}
 \end{figure}
 
-The avoidance of an arbitrarily positioned circular obstacle is successfully mastered by the IRF algorithm (Fig.~\ref{fig:oneStaticCirc_IFD}). The obstacle trajectory avoid the obstacle on both sides and it resembles natural flow.
-%\subsubsection{Static Limit Cycle}
-The IRF can avoid several obstacles when being placed in a nonlinear DS with a limit cycle  (Fig.~\ref{fig:limitCicle_twoObst_IFD_time0}). The ellipse form of the initial limit cycle can still be identified far away from the obstacles and the trajectories move close to the obstacle boundaries when it is close to them.
-
+The avoidance of an arbitrary placed circular obstacle is easily avoided with both algorithms (Fig.\ref{fig:static_circle}). In fact, no real difference of the behavior can be observed and this was expected, because the IFD uses the DMM on a circular obstacle as a starting evaluation. Only for more complex shapes, a difference and also the advantage of the IFD can be observed.
 \begin{figure}[tb]\centering
 \begin{subfigure}{.48\columnwidth} %
 \centering
 \includegraphics[width=\textwidth]{fig/oneStaticCirc_DMM_time0.eps}
-\caption{Avoiding a circle in an original DS with a single attractor.}
-\label{fig:oneStaticCirc_DNN}
+\caption{DMM}
+\label{fig:oneStaticCirc_DMM}
 \end{subfigure}\,\, %
 \begin{subfigure}{.48\columnwidth} %
 \centering
 \includegraphics[width=\textwidth]{fig/oneStaticCirc_IFD_time0.eps}
-\caption{Avoiding a circle in an original DS with a single attractor.}
+\caption{IFD}
 \label{fig:oneStaticCirc_IFD}
 \end{subfigure}\,\, %
-\caption{Using IFD to avoid static obstacles in different DS.}
-\label{fig:static_IFD}
+\caption{Obstacle avoidance of a static circle placed in a linear DS.}
+\label{fig:static_circle}
 \end{figure}
 
 

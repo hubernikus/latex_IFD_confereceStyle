@@ -14,9 +14,9 @@ where $\delta t$ is the integration step.
 
 In presence of obstacles, the initial DS needs to be modulated to generate a safe trajectory without collision with the obstacle boundary. For this region, a continuous function, here referred as level function, $\Gamma(\tilde \xi) \; : \;\mathbb{R}^d \mapsto \mathbb{R}$ is used to partition space into three regions:
 \begin{align}
-  &\text{Interior points:}  \qquad & \mathcal{X}^o = \{\xi \in \mathbb{R}^d: \Gamma(\tilde \xi) < 1 \} \\
+  &\text{Interior points:}  \qquad & \mathcal{X}^i = \{\xi \in \mathbb{R}^d: \Gamma(\tilde \xi) < 1 \} \\
   &\text{Boundary points:}  \qquad & \mathcal{X}^b = \{\xi \in \mathbb{R}^d: \Gamma(\tilde \xi) = 1 \} \\
-  &\text{Free region:}  \qquad & \mathcal{X}^f = \{\xi \in \mathbb{R}^d: \Gamma(\tilde \xi) > 1 \}
+  &\text{Exterior points:}  \qquad & \mathcal{X}^e = \{\xi \in \mathbb{R}^d: \Gamma(\tilde \xi) > 1 \}
 \end{align}
 with $\tilde \xi = \xi - \xi^0$ is the distance from the center of the object $\xi^0$. Furthermore, the function $\Gamma (\tilde \xi)$ has a continuous first order partial derivative and the function value increases monotonically on level surfaces further away from the origin.
 
@@ -105,7 +105,7 @@ Intuitively, impenetrability is checked by analyzing the behavior of the modulat
   \begin{cases}
     0 \qquad & i = 1 \\
     2 \qquad & \text{otherwise}
-  \end{cases}
+  \end{cases} \label{eq:eigenValues}
 \end{equation}
 In such a case, the vector field in the normal direction $\vec n$ vanishes, while it doubles in tangential direction. A more extensive proof of impenetrability can be found in \cite{khansari2012dynamical}. \hfill $\blacksquare$
 
@@ -114,7 +114,7 @@ Let us consider an obstacle $\Gamma(\tilde \xi)$ that is moving with linear and 
 \begin{equation}
   \dot \xi = M(\tilde \xi) (f(\cdot) - \dot\xi_L^o - \dot \xi_R^o \times \tilde \xi)  +\dot \xi^o_L + \dot \xi_R^o \times \tilde \xi
 \end{equation}
-where $(\cdot) \time (\cdot)$ denotes the cross product. It could be shown, that this equation ensures impenetrability for any convex, single moving obstacle. Further extension to include several obstacles and reduce the effect of the angular velocity are proposed in \cite{khansari2012realtime,}.
+where $(\cdot) \times (\cdot)$ denotes the cross product. It could be shown, that this equation ensures impenetrability for any convex, single moving obstacle. Further extension to include several obstacles and reduce the effect of the angular velocity are proposed in \cite{khansari2012realtime,}.
 
 Fig.~\ref{fig:static_DMM} illustrates the behavior of the DMM algorithm. In the first case with two ellipses in a limit cycle system, the algorithm does avoid them in a natural way. Where it creates a new limit cycle, that avoids the obstacle close to them, but is equal to the original limit cycle further away. \\
 On the other hand, the algorithm shows large limitations, when it has to avoid the ellipse (Fig.~\ref{fig:staticEllipse_DMM_time0}). While the DS does not penetrate to obstacle boundary, it can be observed that most streamlines which start on the left hand side of the obstacle converge to a local minimum on the obstacle. While only the streamlines on the right converge to the attractor of the linear DS (black star). This is a undesired behavior of the algorithm, and it will be further investigated and corrected.
